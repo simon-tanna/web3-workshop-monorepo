@@ -11,12 +11,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
   const id = process.env.THIRD_WEB_CLIENT_ID;
 
-  const client = createThirdwebClient({
-    clientId: "d8c72bb562cde401bd32af77c6d12c93",
-  });
-
   return (
-    <ThirdwebProvider client={client}>
+    <ThirdwebProvider>
       <QueryClientProvider client={queryClient}>
         <ChakraProvider>
           <ApplicationContainer>
