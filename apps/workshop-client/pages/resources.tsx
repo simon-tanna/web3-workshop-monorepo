@@ -1,16 +1,10 @@
 import { LinkCard } from "@/components/cards";
+import { PageStack } from "@/styles";
 import { Container, Heading, Stack, Text } from "@chakra-ui/react";
 
 const Resources = () => {
   return (
-    <Stack
-      textAlign="center"
-      alignItems="center"
-      width="100%"
-      spacing={5}
-      marginTop="30px"
-      h="100%"
-    >
+    <PageStack>
       <Heading>Resources</Heading>
       <Stack
         direction="row"
@@ -47,7 +41,7 @@ const Resources = () => {
           url="https://github.com/simon-tanna/web3-workshop-monorepo/blob/main/packages/contracts/contracts/WorkshopToken.sol"
         />
       </Stack>
-    </Stack>
+    </PageStack>
   );
 };
 

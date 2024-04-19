@@ -1,17 +1,7 @@
 import { Flex, Stack, Text } from "@chakra-ui/react";
-import {
-  FiBarChart2,
-  FiCamera,
-  FiFilm,
-  FiHome,
-  FiInstagram,
-  FiLinkedin,
-  FiMic,
-  FiMusic,
-  FiTwitter,
-} from "react-icons/fi";
+import { FiBarChart2, FiHome, FiClipboard } from "react-icons/fi";
+import { GiTap } from "react-icons/gi";
 import { ConnectWallet, NavButton } from "./buttons";
-import Link from "next/link";
 
 const Sidebar = () => (
   <Flex as="section" minH="100vh" bg="blue.900">
@@ -27,36 +17,34 @@ const Sidebar = () => (
         <Stack spacing="8" shouldWrapChildren>
           <ConnectWallet />
           <Stack spacing="1">
-            <Link href="/">
-              <NavButton label="Home" icon={FiHome} />
-            </Link>
-            <Link href="/resources">
+            <NavButton label="Home" icon={FiHome} url="/" />
+            <NavButton
+              label="Resources"
+              icon={FiBarChart2}
+              aria-current="page"
+              url="/resources"
+            />
+          </Stack>
+          <Stack>
+            <Text textStyle="sm" color="fg.subtle" fontWeight="medium">
+              Sandbox Playground
+            </Text>
+            <Stack spacing="1">
               <NavButton
-                label="Resources"
-                icon={FiBarChart2}
-                aria-current="page"
+                label="Simple Storage"
+                icon={FiClipboard}
+                url="/playground/simple-storage"
               />
-            </Link>
-          </Stack>
-          <Stack>
-            <Text textStyle="sm" color="fg.subtle" fontWeight="medium">
-              Media
-            </Text>
-            <Stack spacing="1">
-              <NavButton label="Movies" icon={FiFilm} />
-              <NavButton label="Pictures" icon={FiCamera} />
-              <NavButton label="Music" icon={FiMusic} />
-              <NavButton label="Podcasts" icon={FiMic} />
-            </Stack>
-          </Stack>
-          <Stack>
-            <Text textStyle="sm" color="fg.subtle" fontWeight="medium">
-              Social
-            </Text>
-            <Stack spacing="1">
-              <NavButton label="Twitter" icon={FiTwitter} />
-              <NavButton label="Instagram" icon={FiInstagram} />
-              <NavButton label="Linkedin" icon={FiLinkedin} />
+              <NavButton
+                label="ERC20 Faucet"
+                icon={GiTap}
+                url="/playground/erc20"
+              />
+              <NavButton
+                label="ERC721"
+                icon={FiClipboard}
+                url="/playground/erc721"
+              />
             </Stack>
           </Stack>
         </Stack>
