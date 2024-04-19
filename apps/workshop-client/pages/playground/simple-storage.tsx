@@ -13,7 +13,13 @@ import {
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { useCallback, useContext, useEffect, useState } from "react";
-import { readContract } from "thirdweb";
+import {
+  PreparedTransaction,
+  prepareContractCall,
+  readContract,
+  sendTransaction,
+} from "thirdweb";
+import { useActiveWallet } from "thirdweb/react";
 
 const SimpleStorage: NextPage = () => {
   const { client } = useContext(ThirdWebClientContext);
@@ -24,6 +30,8 @@ const SimpleStorage: NextPage = () => {
     userName: string;
     favouriteNumber: string;
   }>();
+
+  const wallet = useActiveWallet();
 
   const simpleStorageContract = getSimpleStorageContract(client);
 
@@ -79,6 +87,35 @@ const SimpleStorage: NextPage = () => {
     setUserByIndex({
       userName: result[1],
       favouriteNumber: result[0].toString(),
+    });
+  };
+
+  const prepareAddPersonAndNumberTransaction = (
+    favouriteNumber: string,
+    name: string,
+  ) => {
+    if (!simpleStorageContract) {
+      return;
+    }
+    const preparedTransaction = prepareContractCall({
+      contract: simpleStorageContract,
+      method: "addPerson",
+      params: [name, BigInt(favouriteNumber)],
+    });
+
+    return preparedTransaction;
+  };
+
+  const addPersonAndNumber = async (
+    preparedTransaction: PreparedTransaction,
+  ) => {
+    if (!wallet) {
+      return;
+    }
+
+    const transactionResult = await sendTransaction({
+      transaction: preparedTransaction,
+      wallet,
     });
   };
 

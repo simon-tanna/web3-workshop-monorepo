@@ -24,6 +24,7 @@
     "thirdweb": "^5.7.0"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^14.2.2",
     "@shopify/eslint-plugin": "^42.0.1",
     "@tanstack/eslint-plugin-query": "^5.17.1",
     "@types/node": "^20",
