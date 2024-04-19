@@ -10,7 +10,7 @@ import {
   FiMusic,
   FiTwitter,
 } from "react-icons/fi";
-import { NavButton } from "./buttons";
+import { ConnectWallet, NavButton } from "./buttons";
 import Link from "next/link";
 
 const Sidebar = () => (
@@ -25,7 +25,7 @@ const Sidebar = () => (
     >
       <Stack justify="space-between" spacing="1" width="full">
         <Stack spacing="8" shouldWrapChildren>
-          {/* <Logo /> */}
+          <ConnectWallet />
           <Stack spacing="1">
             <Link href="/">
               <NavButton label="Home" icon={FiHome} />
