@@ -1,8 +1,9 @@
 import { PageStack } from "@/styles";
-import { Container, Heading, Spinner, Text } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
+import { NextPage } from "next";
 import Head from "next/head";
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
@@ -16,4 +17,6 @@ export default function Home() {
       </PageStack>
     </>
   );
-}
+};
+
+export default Home;

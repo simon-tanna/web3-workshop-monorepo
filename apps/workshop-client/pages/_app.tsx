@@ -7,7 +7,7 @@ import { ThirdwebProvider } from "thirdweb/react";
 import * as dotenv from "dotenv";
 import ApplicationContainer from "@/components/ApplicationContainer";
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient();
   const id = process.env.THIRD_WEB_CLIENT_ID;
 
@@ -22,4 +22,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </QueryClientProvider>
     </ThirdwebProvider>
   );
-}
+};
+
+export default App;

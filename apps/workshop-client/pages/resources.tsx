@@ -1,8 +1,9 @@
 import { LinkCard } from "@/components/cards";
 import { PageStack } from "@/styles";
-import { Container, Heading, Stack, Text } from "@chakra-ui/react";
+import {  Heading, Stack } from "@chakra-ui/react";
+import { NextPage } from "next";
 
-const Resources = () => {
+const Resources: NextPage = () => {
   return (
     <PageStack>
       <Heading>Resources</Heading>
