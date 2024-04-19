@@ -1,11 +1,10 @@
-import { createThirdwebClient } from "thirdweb";
+import { ThirdWebClientContext } from "@/contexts/ThirdWebClientContext";
+import { useContext } from "react";
 import { ConnectButton } from "thirdweb/react";
 import { createWallet, walletConnect } from "thirdweb/wallets";
 
 export const ConnectWallet = () => {
-  const client = createThirdwebClient({
-    clientId: process.env.NEXT_PUBLIC_THIRD_WEB_CLIENT_ID as string,
-  });
+  const { client } = useContext(ThirdWebClientContext);
 
   const wallets = [
     createWallet("io.metamask"),
@@ -15,19 +14,20 @@ export const ConnectWallet = () => {
     createWallet("app.phantom"),
   ];
 
-  return (
-    <ConnectButton
-      client={client}
-      wallets={wallets}
-      theme={"light"}
-      connectButton={{ label: "Connect" }}
-      connectModal={{
-        size: "wide",
-        welcomeScreen: {
-          title: "Welcome to the web3 ecosystem",
-          subtitle: "Get ready to shape the new world!",
-        },
-      }}
-    />
-  );
+  if (client)
+    return (
+      <ConnectButton
+        client={client}
+        wallets={wallets}
+        theme={"light"}
+        connectButton={{ label: "Connect" }}
+        connectModal={{
+          size: "wide",
+          welcomeScreen: {
+            title: "Welcome to the web3 ecosystem",
+            subtitle: "Get ready to shape the new world!",
+          },
+        }}
+      />
+    );
 };

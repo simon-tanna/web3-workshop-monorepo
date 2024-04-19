@@ -1,4 +1,4 @@
-export const sbi = [
+export const STORE_MY_NUMBER_ABI = [
   {
     inputs: [
       {
@@ -105,4 +105,4 @@ export const sbi = [
     stateMutability: "nonpayable",
     type: "function",
   },
-];
+] as const;

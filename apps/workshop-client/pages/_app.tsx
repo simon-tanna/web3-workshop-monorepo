@@ -6,6 +6,7 @@ import { createThirdwebClient } from "thirdweb";
 import { ThirdwebProvider } from "thirdweb/react";
 import * as dotenv from "dotenv";
 import ApplicationContainer from "@/components/ApplicationContainer";
+import { ThirdWebClientProvider } from "@/contexts/ThirdWebClientProvider";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient();
@@ -13,13 +14,15 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <ThirdwebProvider>
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider>
-          <ApplicationContainer>
-            <Component {...pageProps} />
-          </ApplicationContainer>
-        </ChakraProvider>
-      </QueryClientProvider>
+      <ThirdWebClientProvider>
+        <QueryClientProvider client={queryClient}>
+          <ChakraProvider>
+            <ApplicationContainer>
+              <Component {...pageProps} />
+            </ApplicationContainer>
+          </ChakraProvider>
+        </QueryClientProvider>
+      </ThirdWebClientProvider>
     </ThirdwebProvider>
   );
 };
