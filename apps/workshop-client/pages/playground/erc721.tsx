@@ -1,5 +1,6 @@
 import { PageStack } from "@/styles";
 import { Heading, Text } from "@chakra-ui/react";
+
 import { NextPage } from "next";
 
 const Erc721: NextPage = () => {
