@@ -54,35 +54,28 @@ const SimpleStorage: NextPage = () => {
 
   const account = useActiveAccount();
 
-  const simpleStorageContract = getStoreMyNumberContract(client);
+  // const getStoredNumber = useCallback(async () => {
+  //   if (!simpleStorageContract) {
+  //     return;
+  //   }
+  //   const storedNumber = await readContract({
+  //     contract: simpleStorageContract,
+  //     method: "retrieve",
+  //   });
 
-  /**
-   * Fetches the current stored number from the SimpleStorage contract.
-   *
-   * @returns A string representation of the stored number.
-   */
-  const getStoredNumber = useCallback(async () => {
-    if (!simpleStorageContract) {
-      return;
-    }
-    const storedNumber = await readContract({
-      contract: simpleStorageContract,
-      method: "retrieve",
-    });
+  //   return storedNumber.toString();
+  // }, [simpleStorageContract]);
 
-    return storedNumber.toString();
-  }, [simpleStorageContract]);
-
-  useEffect(() => {
-    const fetchStoredNumber = async () => {
-      const storedNumberResult = await getStoredNumber();
-      if (!storedNumberResult) {
-        return;
-      }
-      setStoredNumber(storedNumberResult);
-    };
-    fetchStoredNumber();
-  }, [getStoredNumber]);
+  // useEffect(() => {
+  //   const fetchStoredNumber = async () => {
+  //     const storedNumberResult = await getStoredNumber();
+  //     if (!storedNumberResult) {
+  //       return;
+  //     }
+  //     setStoredNumber(storedNumberResult);
+  //   };
+  //   fetchStoredNumber();
+  // }, [getStoredNumber]);
 
   /**
    * Retrieves a user's favorite number by their name from the SimpleStorage contract.
@@ -90,19 +83,7 @@ const SimpleStorage: NextPage = () => {
    * @param name - The name of the user.
    * @returns A string representation of the user's favorite number.
    */
-  const getNumberByName = async (name: string) => {
-    if (!simpleStorageContract) {
-      return;
-    }
-    const result = await readContract({
-      contract: simpleStorageContract,
-      method: "retrievePeopleByName",
-      params: [name],
-    });
-
-    setUserNumber(result.toString());
-    return result.toString();
-  };
+  const getNumberByName = async (name: string) => {};
 
   /**
    * Retrieves a user's name and favorite number by their index from the SimpleStorage contract.
@@ -112,23 +93,7 @@ const SimpleStorage: NextPage = () => {
    *   - userName: The user's name.
    *   - favouriteNumber: The user's favorite number (as a string).
    */
-  const getPersonByIndex = async (index: string) => {
-    if (!simpleStorageContract) {
-      return;
-    }
-    const result = await readContract({
-      contract: simpleStorageContract,
-      method: "people",
-      params: [BigInt(index)],
-    });
-
-    setUserByIndex((prevState) => ({
-      ...prevState,
-      userName: result[1],
-      favouriteNumber: result[0].toString(),
-    }));
-    return { userName: result[1], favouriteNumber: result[0].toString() };
-  };
+  const getPersonByIndex = async (index: string) => {};
 
   /**
    * Adds a new user and their favorite number to the SimpleStorage contract.
@@ -143,30 +108,7 @@ const SimpleStorage: NextPage = () => {
   }: {
     name: string;
     favouriteNumber: string;
-  }) => {
-    if (!simpleStorageContract) {
-      throw new Error("Contract not found");
-    }
-    const preparedTransaction = prepareContractCall({
-      contract: simpleStorageContract,
-      method: "addPerson",
-      params: [name, BigInt(favouriteNumber)],
-    });
-
-    if (!preparedTransaction) {
-      throw new Error("Transaction not prepared");
-    }
-    if (!account) {
-      throw new Error("Account not found");
-    }
-
-    const transactionResult = await sendTransaction({
-      transaction: preparedTransaction,
-      account: account,
-    });
-
-    setTransactionHash(transactionResult.transactionHash);
-  };
+  }) => {};
 
   const addPersonAndNumberMutation = useMutation({
     mutationFn: addPersonAndNumber,
@@ -185,30 +127,7 @@ const SimpleStorage: NextPage = () => {
    * @param newNumber - The new number to store (as a string).
    * @throws An error if the contract or active account is not found, or the transaction preparation fails.
    */
-  const changeStoredNumber = async (newNumber: string) => {
-    if (!simpleStorageContract) {
-      throw new Error("Contract not found");
-    }
-    const preparedTransaction = prepareContractCall({
-      contract: simpleStorageContract,
-      method: "store",
-      params: [BigInt(newNumber)],
-    });
-
-    if (!preparedTransaction) {
-      throw new Error("Transaction not prepared");
-    }
-    if (!account) {
-      throw new Error("Account not found");
-    }
-
-    const transactionResult = await sendTransaction({
-      transaction: preparedTransaction,
-      account: account,
-    });
-
-    setTransactionHash(transactionResult.transactionHash);
-  };
+  const changeStoredNumber = async (newNumber: string) => {};
 
   const changeStoredNumberMutation = useMutation({
     mutationFn: changeStoredNumber,
