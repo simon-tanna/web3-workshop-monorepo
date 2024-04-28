@@ -11,7 +11,6 @@ import { theme } from "@/styles/theme";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient();
-  const id = process.env.THIRD_WEB_CLIENT_ID;
 
   return (
     <ThirdwebProvider>
