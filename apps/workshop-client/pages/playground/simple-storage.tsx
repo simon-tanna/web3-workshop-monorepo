@@ -54,170 +54,6 @@ const SimpleStorage: NextPage = () => {
 
   const account = useActiveAccount();
 
-  const simpleStorageContract = getStoreMyNumberContract(client);
-
-  /**
-   * Fetches the current stored number from the SimpleStorage contract.
-   *
-   * @returns A string representation of the stored number.
-   */
-  const getStoredNumber = useCallback(async () => {
-    if (!simpleStorageContract) {
-      return;
-    }
-    const storedNumber = await readContract({
-      contract: simpleStorageContract,
-      method: "retrieve",
-    });
-
-    return storedNumber.toString();
-  }, [simpleStorageContract]);
-
-  useEffect(() => {
-    const fetchStoredNumber = async () => {
-      const storedNumberResult = await getStoredNumber();
-      if (!storedNumberResult) {
-        return;
-      }
-      setStoredNumber(storedNumberResult);
-    };
-    fetchStoredNumber();
-  }, [getStoredNumber]);
-
-  /**
-   * Retrieves a user's favorite number by their name from the SimpleStorage contract.
-   *
-   * @param name - The name of the user.
-   * @returns A string representation of the user's favorite number.
-   */
-  const getNumberByName = async (name: string) => {
-    if (!simpleStorageContract) {
-      return;
-    }
-    const result = await readContract({
-      contract: simpleStorageContract,
-      method: "retrievePeopleByName",
-      params: [name],
-    });
-
-    setUserNumber(result.toString());
-    return result.toString();
-  };
-
-  /**
-   * Retrieves a user's name and favorite number by their index from the SimpleStorage contract.
-   *
-   * @param index - The index of the user (as a string).
-   * @returns An object containing:
-   *   - userName: The user's name.
-   *   - favouriteNumber: The user's favorite number (as a string).
-   */
-  const getPersonByIndex = async (index: string) => {
-    if (!simpleStorageContract) {
-      return;
-    }
-    const result = await readContract({
-      contract: simpleStorageContract,
-      method: "people",
-      params: [BigInt(index)],
-    });
-
-    setUserByIndex((prevState) => ({
-      ...prevState,
-      userName: result[1],
-      favouriteNumber: result[0].toString(),
-    }));
-    return { userName: result[1], favouriteNumber: result[0].toString() };
-  };
-
-  /**
-   * Adds a new user and their favorite number to the SimpleStorage contract.
-   *
-   * @param name - The user's name.
-   * @param favouriteNumber - The user's favorite number (as a string).
-   * @throws An error if the contract or active account is not found, or the transaction preparation fails.
-   */
-  const addPersonAndNumber = async ({
-    name,
-    favouriteNumber,
-  }: {
-    name: string;
-    favouriteNumber: string;
-  }) => {
-    if (!simpleStorageContract) {
-      throw new Error("Contract not found");
-    }
-    const preparedTransaction = prepareContractCall({
-      contract: simpleStorageContract,
-      method: "addPerson",
-      params: [name, BigInt(favouriteNumber)],
-    });
-
-    if (!preparedTransaction) {
-      throw new Error("Transaction not prepared");
-    }
-    if (!account) {
-      throw new Error("Account not found");
-    }
-
-    const transactionResult = await sendTransaction({
-      transaction: preparedTransaction,
-      account: account,
-    });
-
-    setTransactionHash(transactionResult.transactionHash);
-  };
-
-  const addPersonAndNumberMutation = useMutation({
-    mutationFn: addPersonAndNumber,
-  });
-
-  const onAddPersonAndNumberSubmit = () => {
-    addPersonAndNumberMutation.mutate({
-      name: newName ?? "",
-      favouriteNumber: newNumber ?? "",
-    });
-  };
-
-  /**
-   * Updates the stored number in the SimpleStorage contract.
-   *
-   * @param newNumber - The new number to store (as a string).
-   * @throws An error if the contract or active account is not found, or the transaction preparation fails.
-   */
-  const changeStoredNumber = async (newNumber: string) => {
-    if (!simpleStorageContract) {
-      throw new Error("Contract not found");
-    }
-    const preparedTransaction = prepareContractCall({
-      contract: simpleStorageContract,
-      method: "store",
-      params: [BigInt(newNumber)],
-    });
-
-    if (!preparedTransaction) {
-      throw new Error("Transaction not prepared");
-    }
-    if (!account) {
-      throw new Error("Account not found");
-    }
-
-    const transactionResult = await sendTransaction({
-      transaction: preparedTransaction,
-      account: account,
-    });
-
-    setTransactionHash(transactionResult.transactionHash);
-  };
-
-  const changeStoredNumberMutation = useMutation({
-    mutationFn: changeStoredNumber,
-  });
-
-  const onChangeStoredNumberSubmit = () => {
-    changeStoredNumberMutation.mutate(newNumber ?? "7");
-  };
-
   return (
     <PageStack>
       <Heading>Simple Storage</Heading>
@@ -243,11 +79,7 @@ const SimpleStorage: NextPage = () => {
                   onChange={(e) => setUserName(e.target.value)}
                 />
               </FormControl>
-              <Button
-                onClick={async () => await getNumberByName(userName ?? "")}
-              >
-                Get Number
-              </Button>
+              <Button onClick={() => {}}>Get Number</Button>
               <Heading size="sm">User Number</Heading>
               <Text>{userNumber}</Text>
             </VStack>
@@ -272,9 +104,7 @@ const SimpleStorage: NextPage = () => {
                   onChange={(e) => setIndex(e.target.value)}
                 />
               </FormControl>
-              <Button onClick={async () => await getPersonByIndex(index)}>
-                Get Name By Index
-              </Button>
+              <Button onClick={() => {}}>Get Name By Index</Button>
               <Heading size="md">User Name in index {index}</Heading>
               <Text>{userByIndex?.userName}</Text>
               <Heading size="md">Favourite Number in index {index}</Heading>
@@ -307,7 +137,7 @@ const SimpleStorage: NextPage = () => {
                   onChange={(e) => setNewNumber(e.target.value)}
                 />
               </FormControl>
-              <Button onClick={onAddPersonAndNumberSubmit}>Add Person</Button>
+              <Button onClick={() => {}}>Add Person</Button>
               {transactionHash && (
                 <>
                   <Heading size="sm">Transaction Hash</Heading>
@@ -342,19 +172,11 @@ const SimpleStorage: NextPage = () => {
                   onChange={(e) => setNewNumber(e.target.value)}
                 />
               </FormControl>
-              <Button onClick={onChangeStoredNumberSubmit}>
-                Set New Number
-              </Button>
+              <Button onClick={() => {}}>Set New Number</Button>
             </VStack>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
-      {addPersonAndNumberMutation.isError && (
-        <Text color="red.500">{addPersonAndNumberMutation.error.message}</Text>
-      )}
-      {changeStoredNumberMutation.isError && (
-        <Text color="red.500">{changeStoredNumberMutation.error.message}</Text>
-      )}
     </PageStack>
   );
 };
