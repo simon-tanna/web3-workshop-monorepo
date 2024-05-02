@@ -6,15 +6,23 @@ import { createThirdwebClient } from "thirdweb";
 import { ThirdwebProvider } from "thirdweb/react";
 import * as dotenv from "dotenv";
 import ApplicationContainer from "@/components/ApplicationContainer";
+import { chillax } from "@/styles/fonts";
+import { theme } from "@/styles/theme";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient();
-  const id = process.env.THIRD_WEB_CLIENT_ID;
 
   return (
     <ThirdwebProvider>
       <QueryClientProvider client={queryClient}>
-        <ChakraProvider>
+        <style jsx global>
+          {`
+            :root {
+              --font-chillax: ${chillax.style.fontFamily};
+            }
+          `}
+        </style>
+        <ChakraProvider theme={theme}>
           <ApplicationContainer>
             <Component {...pageProps} />
           </ApplicationContainer>
