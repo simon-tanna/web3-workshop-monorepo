@@ -34,6 +34,13 @@ const Home: NextPage = () => {
                 href="https://www.alchemy.com/faucets/ethereum-sepolia"
               >
                 HERE
+              </Link>{" "}
+              or{" "}
+              <Link
+                target="_blank"
+                href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia"
+              >
+                HERE
               </Link>
             </ListItem>
             <ListItem>
@@ -46,7 +53,21 @@ const Home: NextPage = () => {
               </Link>{" "}
             </ListItem>
             <ListItem>Clone the workshop repo </ListItem>
-            <Code>git@github.com:simon-tanna/web3-workshop-monorepo.git</Code>
+            <Code>
+              git clone git@github.com:simon-tanna/web3-workshop-monorepo.git
+            </Code>
+            <ListItem>Checkout the branch </ListItem>
+            <Code>git checkout favourite-number-pg-scaffold</Code>
+            <ListItem>
+              Run <Code>yarn</Code>
+            </ListItem>
+            <ListItem>
+              Then <Code>touch apps/workshop-client/.env</Code>
+            </ListItem>
+            <ListItem>
+              Copy over the contents of .env.example to the .env file and add
+              your ThirdWeb API keys.
+            </ListItem>
           </OrderedList>
         </Flex>
       </PageStack>
