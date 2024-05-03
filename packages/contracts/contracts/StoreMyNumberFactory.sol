@@ -1,6 +1,29 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.20;
 
+/// @title Factory contract for deploying StoreMyNumber contracts
+contract StoreMyNumberFactory {
+    // Mapping to keep track of deployed contracts and their owners
+    mapping(address => address) public deployedContracts;
+    // Event to log contract deployment
+    event ContractDeployed(address indexed owner, address indexed contractAddress);
+
+    /// @notice Deploys a new instance of the StoreMyNumber contract
+    /// @param _favoriteNumber The favorite number to initialize in the new contract
+    function deployStoreMyNumber(uint256 _favoriteNumber) external {
+        StoreMyNumber newContract = new StoreMyNumber();
+        newContract.store(_favoriteNumber);
+        deployedContracts[msg.sender] = address(newContract);
+        emit ContractDeployed(msg.sender, address(newContract));
+    }
+
+    /// @notice Retrieves the deployed StoreMyNumber contract address for the caller
+    /// @return The address of the deployed contract, if any
+    function getDeployedStoreMyNumber() external view returns (address) {
+        return deployedContracts[msg.sender];
+    }
+}
+
 /// @title A contract for storing and retrieving people's favorite numbers
 /// @dev This contract allows users to store a favorite number, add a person with a favorite number,
 /// and retrieve information about people's favorite numbers using their name.
