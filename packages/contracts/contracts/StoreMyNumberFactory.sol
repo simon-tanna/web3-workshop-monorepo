@@ -30,7 +30,7 @@ contract StoreMyNumberFactory {
 ///
 contract StoreMyNumber {
     /// @notice Stores the favorite number set by the last user who called `store`.
-    uint256 public favoriteNumber;
+    uint256 favoriteNumber;
 
     /// @notice Struct representing a person with a name and their favorite number.
     /// @param favoriteNumber The person's favorite number.
@@ -55,6 +55,12 @@ contract StoreMyNumber {
         favoriteNumber = _favoriteNumber;
     }
 
+    /// @notice Retrieves the last stored favorite number.
+    /// @return The last stored favorite number.
+    function retrieve() public view returns (uint256) {
+        return favoriteNumber;
+    }
+
     /// @notice Adds a new person's name and favorite number to the contract.
     /// @dev Adds a new `People` struct to the `people` array and updates the `nameToFavoriteNumber` mapping.
     /// @param _name The name of the person to add.
@@ -70,7 +76,9 @@ contract StoreMyNumber {
     /// @param _name The name of the person whose favorite number to retrieve.
     /// @return The favorite number of the person.
     ///
-    function retrievePeopleByName(string memory _name) public view returns (uint256) {
+    function retrievePeopleByName(
+        string memory _name
+    ) public view returns (uint256) {
         return nameToFavoriteNumber[_name];
     }
 }
