@@ -34,6 +34,13 @@ const Home: NextPage = () => {
                 href="https://www.alchemy.com/faucets/ethereum-sepolia"
               >
                 HERE
+              </Link>{" "}
+              or{" "}
+              <Link
+                target="_blank"
+                href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia"
+              >
+                HERE
               </Link>
             </ListItem>
             <ListItem>
