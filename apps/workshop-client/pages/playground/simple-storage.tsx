@@ -65,7 +65,7 @@ const SimpleStorage: NextPage = () => {
           <h2>
             <AccordionButton w="100%" justifyContent="space-between">
               <Box as="span" textAlign="left">
-                User Name By Number
+                Number By User Name
               </Box>
               <AccordionIcon color="white" />
             </AccordionButton>
