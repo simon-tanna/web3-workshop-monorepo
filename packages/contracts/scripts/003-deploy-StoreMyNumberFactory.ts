@@ -1,27 +1,28 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  // Create a factory for the contract
-  const StoreMyNumber = await ethers.getContractFactory("StoreMyNumber");
+  // Load the compiled Factory contract artifacts
+  const FactoryContract = await ethers.getContractFactory(
+    "StoreMyNumberFactory"
+  );
 
-  console.log("Deploying StoreMyNumber...");
+  console.log("Deploying StoreMyNumberFactory...");
 
-  // Deploy the contract
-  const deployment = await StoreMyNumber.deploy();
+  // Deploy the factory contract
+  const deployment = await FactoryContract.deploy();
   const deployedContract = await deployment.waitForDeployment();
   const contractAddress = await deployedContract.getAddress();
   const contractTransaction = deployedContract.deploymentTransaction();
 
   console.log(
-    "StoreMyNumber deployed to:",
+    "StoreMyNumberFactory deployed to:",
     contractAddress,
     "Transaction hash: ",
     contractTransaction?.hash
   );
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
+// Execute the deploy script
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

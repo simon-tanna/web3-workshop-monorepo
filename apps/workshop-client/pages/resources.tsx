@@ -1,6 +1,6 @@
 import { LinkCard } from "@/components/cards";
 import { PageStack } from "@/styles";
-import {  Heading, Stack } from "@chakra-ui/react";
+import { Heading, Stack } from "@chakra-ui/react";
 import { NextPage } from "next";
 
 const Resources: NextPage = () => {
@@ -36,10 +36,10 @@ const Resources: NextPage = () => {
           url="https://github.com/simon-tanna/web3-workshop-monorepo/blob/main/packages/contracts/contracts/StoreMyNumber.sol"
         />
         <LinkCard
-          imageUrl="https://i.ebayimg.com/images/g/gioAAOSwkF5jkqbo/s-l1200.webp"
-          heading="ERC20 Token Faucet Contract"
-          text="A simple contract to mint ERC20 tokens"
-          url="https://github.com/simon-tanna/web3-workshop-monorepo/blob/main/packages/contracts/contracts/WorkshopToken.sol"
+          imageUrl="https://www.treehugger.com/thmb/hJwbG6KQwjlerV9BEguus_FeOC0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/3688693378_56c58b1f49_o-d5ef62c1cb6d4449b13a552aac845e1e.jpg"
+          heading="Store My Number Factory"
+          text="Deploy your own Store My Number contract"
+          url="/contract-factory"
         />
       </Stack>
     </PageStack>
