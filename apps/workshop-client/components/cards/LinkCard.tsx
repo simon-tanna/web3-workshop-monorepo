@@ -25,7 +25,7 @@ export const LinkCard = ({ imageUrl, heading, text, url }: LinkCardProps) => {
             <Box h="50%" boxSizing="content-box">
               <Image src={imageUrl} maxH="100%" />
             </Box>
-            <Heading size="md">{heading}</Heading>
+            <Heading size="sm">{heading}</Heading>
             <Text>{text}</Text>
           </VStack>
         </CardBody>

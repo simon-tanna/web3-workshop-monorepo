@@ -1,7 +1,17 @@
 import { PageStack } from "@/styles";
-import { Heading } from "@chakra-ui/react";
+import {
+  Code,
+  Flex,
+  Heading,
+  Link,
+  List,
+  ListItem,
+  OrderedList,
+  Text,
+} from "@chakra-ui/react";
 import { NextPage } from "next";
 import Head from "next/head";
+import NextLink from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -12,8 +22,33 @@ const Home: NextPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageStack>
-        <Heading>Hello World</Heading>
+      <PageStack spacing={8}>
+        <Heading>From Blockchain To Browser</Heading>
+        <Text fontSize="26px">Before we begin</Text>
+        <Flex direction="column">
+          <OrderedList alignItems="flex-start" textAlign="left">
+            <ListItem>
+              Get yourself some Sepolia Eth{" "}
+              <Link
+                target="_blank"
+                href="https://www.alchemy.com/faucets/ethereum-sepolia"
+              >
+                HERE
+              </Link>
+            </ListItem>
+            <ListItem>
+              Get a ThirdWeb API key{" "}
+              <Link
+                target="_blank"
+                href="https://thirdweb.com/dashboard/settings/api-keys"
+              >
+                HERE
+              </Link>{" "}
+            </ListItem>
+            <ListItem>Clone the workshop repo </ListItem>
+            <Code>git@github.com:simon-tanna/web3-workshop-monorepo.git</Code>
+          </OrderedList>
+        </Flex>
       </PageStack>
     </>
   );
